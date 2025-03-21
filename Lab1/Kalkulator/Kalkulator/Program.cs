@@ -1,4 +1,4 @@
-namespace TEST
+namespace Kalkulator
 {
     internal static class Program
     {
