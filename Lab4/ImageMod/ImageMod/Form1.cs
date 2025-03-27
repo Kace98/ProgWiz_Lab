@@ -28,5 +28,26 @@ namespace ImageMod
         {
 
         }
+
+
+
+        private void button_rotate_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image == null)
+                return;
+
+            Image img = pictureBox1.Image;
+            Bitmap bmp = new Bitmap(img);
+
+            if (radioButton_90.Checked)
+                bmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            else if (radioButton_180.Checked)
+                bmp.RotateFlip(RotateFlipType.Rotate180FlipNone);
+            else if (radioButton_270.Checked)
+                bmp.RotateFlip(RotateFlipType.Rotate270FlipNone);
+
+            pictureBox1.Image = bmp;
+
+        }
     }
 }

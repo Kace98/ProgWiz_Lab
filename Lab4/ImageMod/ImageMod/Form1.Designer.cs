@@ -30,6 +30,10 @@
         {
             button_load = new Button();
             pictureBox1 = new PictureBox();
+            button_rotate = new Button();
+            radioButton_90 = new RadioButton();
+            radioButton_180 = new RadioButton();
+            radioButton_270 = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -53,22 +57,75 @@
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
+            // button_rotate
+            // 
+            button_rotate.BackColor = Color.IndianRed;
+            button_rotate.Location = new Point(12, 87);
+            button_rotate.Name = "button_rotate";
+            button_rotate.Size = new Size(121, 36);
+            button_rotate.TabIndex = 5;
+            button_rotate.Text = "Rotate";
+            button_rotate.UseVisualStyleBackColor = false;
+            button_rotate.Click += button_rotate_Click;
+            // 
+            // radioButton_90
+            // 
+            radioButton_90.AutoSize = true;
+            radioButton_90.Location = new Point(12, 12);
+            radioButton_90.Name = "radioButton_90";
+            radioButton_90.Size = new Size(42, 19);
+            radioButton_90.TabIndex = 6;
+            radioButton_90.TabStop = true;
+            radioButton_90.Text = "90°";
+            radioButton_90.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_180
+            // 
+            radioButton_180.AutoSize = true;
+            radioButton_180.Location = new Point(12, 37);
+            radioButton_180.Name = "radioButton_180";
+            radioButton_180.Size = new Size(48, 19);
+            radioButton_180.TabIndex = 7;
+            radioButton_180.TabStop = true;
+            radioButton_180.Text = "180°";
+            radioButton_180.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_270
+            // 
+            radioButton_270.AutoSize = true;
+            radioButton_270.Location = new Point(12, 62);
+            radioButton_270.Name = "radioButton_270";
+            radioButton_270.Size = new Size(48, 19);
+            radioButton_270.TabIndex = 8;
+            radioButton_270.TabStop = true;
+            radioButton_270.Text = "270°";
+            radioButton_270.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(581, 450);
+            Controls.Add(radioButton_270);
+            Controls.Add(radioButton_180);
+            Controls.Add(radioButton_90);
+            Controls.Add(button_rotate);
             Controls.Add(pictureBox1);
             Controls.Add(button_load);
             Name = "Form1";
             Text = "Edytor zdjęć";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Button button_load;
         private PictureBox pictureBox1;
+        private Button button_rotate;
+        private RadioButton radioButton_90;
+        private RadioButton radioButton_180;
+        private RadioButton radioButton_270;
     }
 }
