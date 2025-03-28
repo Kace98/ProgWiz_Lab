@@ -49,5 +49,45 @@ namespace ImageMod
             pictureBox1.Image = bmp;
 
         }
+
+        private Bitmap InvertColors(Bitmap bmp)
+        {
+            Bitmap invertedBmp = new Bitmap(bmp.Width, bmp.Height);
+
+            for (int x=0; x < bmp.Width; x++)
+            {
+                for (int y = 0; y < bmp.Height; y++)
+                {
+                    Color pixel = bmp.GetPixel(x, y);
+                    Color invertedPixel = Color.FromArgb(255 - pixel.R, 255 - pixel.G, 255 - pixel.B);
+                    invertedBmp.SetPixel(x, y, invertedPixel);
+                }
+            }
+
+            return invertedBmp;
+        }
+
+        private void button_invertColors_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image == null)
+                return;
+
+            Bitmap bmp = new Bitmap(pictureBox1.Image);
+            Bitmap negativeBmp = InvertColors(bmp);
+            pictureBox1.Image = negativeBmp;
+        }
+
+        private void button_UpsideDown_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image == null)
+                return;
+
+            Image img = pictureBox1.Image;
+            Bitmap bmp = new Bitmap(img);
+
+            bmp.RotateFlip(RotateFlipType.RotateNoneFlipY);
+
+            pictureBox1.Image = bmp;
+        }
     }
 }

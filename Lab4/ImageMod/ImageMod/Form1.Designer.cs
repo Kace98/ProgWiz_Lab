@@ -34,6 +34,8 @@
             radioButton_90 = new RadioButton();
             radioButton_180 = new RadioButton();
             radioButton_270 = new RadioButton();
+            button_invertColors = new Button();
+            button_UpsideDown = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -101,11 +103,35 @@
             radioButton_270.Text = "270°";
             radioButton_270.UseVisualStyleBackColor = true;
             // 
+            // button_invertColors
+            // 
+            button_invertColors.BackColor = Color.LightSkyBlue;
+            button_invertColors.Location = new Point(12, 129);
+            button_invertColors.Name = "button_invertColors";
+            button_invertColors.Size = new Size(121, 36);
+            button_invertColors.TabIndex = 9;
+            button_invertColors.Text = "Invert Colors";
+            button_invertColors.UseVisualStyleBackColor = false;
+            button_invertColors.Click += button_invertColors_Click;
+            // 
+            // button_UpsideDown
+            // 
+            button_UpsideDown.BackColor = Color.LightSkyBlue;
+            button_UpsideDown.Location = new Point(12, 171);
+            button_UpsideDown.Name = "button_UpsideDown";
+            button_UpsideDown.Size = new Size(121, 36);
+            button_UpsideDown.TabIndex = 10;
+            button_UpsideDown.Text = "Upside Down";
+            button_UpsideDown.UseVisualStyleBackColor = false;
+            button_UpsideDown.Click += button_UpsideDown_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(581, 450);
+            Controls.Add(button_UpsideDown);
+            Controls.Add(button_invertColors);
             Controls.Add(radioButton_270);
             Controls.Add(radioButton_180);
             Controls.Add(radioButton_90);
@@ -127,5 +153,7 @@
         private RadioButton radioButton_90;
         private RadioButton radioButton_180;
         private RadioButton radioButton_270;
+        private Button button_invertColors;
+        private Button button_UpsideDown;
     }
 }
