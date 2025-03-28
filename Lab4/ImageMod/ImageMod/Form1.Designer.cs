@@ -126,6 +126,7 @@
             button_UpsideDown.UseVisualStyleBackColor = false;
             button_UpsideDown.Click += button_UpsideDown_Click;
             // 
+            // 
             // button_OnlyGreen
             // 
             button_OnlyGreen.BackColor = Color.SpringGreen;
