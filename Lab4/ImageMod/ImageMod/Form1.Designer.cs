@@ -36,6 +36,7 @@
             radioButton_270 = new RadioButton();
             button_invertColors = new Button();
             button_UpsideDown = new Button();
+            button_OnlyGreen = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -125,6 +126,17 @@
             button_UpsideDown.UseVisualStyleBackColor = false;
             button_UpsideDown.Click += button_UpsideDown_Click;
             // 
+            // button_OnlyGreen
+            // 
+            button_OnlyGreen.BackColor = Color.SpringGreen;
+            button_OnlyGreen.Location = new Point(12, 354);
+            button_OnlyGreen.Name = "button_OnlyGreen";
+            button_OnlyGreen.Size = new Size(121, 36);
+            button_OnlyGreen.TabIndex = 2;
+            button_OnlyGreen.Text = "OnlyGreen";
+            button_OnlyGreen.UseVisualStyleBackColor = false;
+            button_OnlyGreen.Click += button_OnlyGreen_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -155,5 +167,6 @@
         private RadioButton radioButton_270;
         private Button button_invertColors;
         private Button button_UpsideDown;
+        private Button button_OnlyGreen;
     }
 }
