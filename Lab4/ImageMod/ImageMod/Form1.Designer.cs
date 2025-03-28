@@ -126,11 +126,10 @@
             button_UpsideDown.UseVisualStyleBackColor = false;
             button_UpsideDown.Click += button_UpsideDown_Click;
             // 
-            // 
             // button_OnlyGreen
             // 
             button_OnlyGreen.BackColor = Color.SpringGreen;
-            button_OnlyGreen.Location = new Point(12, 354);
+            button_OnlyGreen.Location = new Point(12, 213);
             button_OnlyGreen.Name = "button_OnlyGreen";
             button_OnlyGreen.Size = new Size(121, 36);
             button_OnlyGreen.TabIndex = 2;
