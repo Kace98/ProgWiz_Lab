@@ -1,3 +1,7 @@
+using System;
+using System.IO;
+using System.Xml.Serialization;
+
 namespace ProjektGridView
 {
     public partial class Form1 : Form
@@ -57,9 +61,9 @@ namespace ProjektGridView
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                if (MessageBox.Show("Czy na pewno chcesz usunąć zaznaczony wiersz?", 
-                                  "Potwierdzenie", 
-                                  MessageBoxButtons.YesNo, 
+                if (MessageBox.Show("Czy na pewno chcesz usunąć zaznaczony wiersz?",
+                                  "Potwierdzenie",
+                                  MessageBoxButtons.YesNo,
                                   MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     dataGridView1.Rows.RemoveAt(dataGridView1.SelectedRows[0].Index);
@@ -67,9 +71,9 @@ namespace ProjektGridView
             }
             else
             {
-                MessageBox.Show("Zaznacz wiersz do usunięcia!", 
-                              "Informacja", 
-                              MessageBoxButtons.OK, 
+                MessageBox.Show("Zaznacz wiersz do usunięcia!",
+                              "Informacja",
+                              MessageBoxButtons.OK,
                               MessageBoxIcon.Information);
             }
         }
@@ -78,7 +82,7 @@ namespace ProjektGridView
         {
             // Zapisanie nextId w pierwszej linii
             string csvContent = $"#NextID:{nextId}" + Environment.NewLine;
-            
+
             // Tworzenie nagłówka pliku CSV
             csvContent += string.Join(",", dataGridView.Columns.Cast<DataGridViewColumn>()
                 .Select(column => column.HeaderText)) + Environment.NewLine;
@@ -106,7 +110,7 @@ namespace ProjektGridView
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 ExportToCSV(dataGridView1, saveFileDialog1.FileName);
-                MessageBox.Show("Dane zostały zapisane pomyślnie!", "Sukces", 
+                MessageBox.Show("Dane zostały zapisane pomyślnie!", "Sukces",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -167,8 +171,92 @@ namespace ProjektGridView
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 LoadCSVToDataGridView(openFileDialog1.FileName);
-                MessageBox.Show("Dane zostały wczytane pomyślnie!", "Sukces", 
+                MessageBox.Show("Dane zostały wczytane pomyślnie!", "Sukces",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void button_SaveToXML_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "Pliki XML (*.xml)|*.xml|Wszystkie pliki (*.*)|*.*";
+            saveFileDialog1.Title = "Wybierz lokalizację zapisu pliku XML";
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                List<Osoba> osoby = new List<Osoba>();
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (!row.IsNewRow)
+                    {
+                        osoby.Add(new Osoba
+                        {
+                            Id = Convert.ToInt32(row.Cells["id"].Value),
+                            Imie = row.Cells["imie"].Value.ToString(),
+                            Nazwisko = row.Cells["nazwisko"].Value.ToString(),
+                            Wiek = Convert.ToInt32(row.Cells["wiek"].Value),
+                            Stanowisko = row.Cells["stanowisko"].Value.ToString()
+                        });
+                    }
+                }
+
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Osoba>));
+                using (TextWriter writer = new StreamWriter(saveFileDialog1.FileName))
+                {
+                    serializer.Serialize(writer, osoby);
+                }
+
+                MessageBox.Show("Dane zostały zapisane pomyślnie do pliku XML!", "Sukces",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void button_ReadFromXML_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "Pliki XML (*.xml)|*.xml|Wszystkie pliki (*.*)|*.*";
+            openFileDialog1.Title = "Wybierz plik XML do wczytania";
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if (!File.Exists(openFileDialog1.FileName))
+                {
+                    MessageBox.Show("Plik XML nie istnieje.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                try
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(List<Osoba>));
+                    List<Osoba> osoby;
+                    using (TextReader reader = new StreamReader(openFileDialog1.FileName))
+                    {
+                        osoby = (List<Osoba>)serializer.Deserialize(reader);
+                    }
+
+                    // Czyszczenie istniejących danych
+                    dataGridView1.Rows.Clear();
+
+                    // Dodawanie wierszy do DataGridView
+                    foreach (Osoba osoba in osoby)
+                    {
+                        dataGridView1.Rows.Add(osoba.Id, osoba.Imie, osoba.Nazwisko, osoba.Wiek, osoba.Stanowisko);
+                    }
+
+                    // Aktualizacja nextId
+                    if (osoby.Count > 0)
+                    {
+                        nextId = osoby.Max(o => o.Id) + 1;
+                    }
+
+                    MessageBox.Show("Dane zostały wczytane pomyślnie z pliku XML!", "Sukces",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Wystąpił błąd podczas wczytywania pliku XML: {ex.Message}", "Błąd",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }

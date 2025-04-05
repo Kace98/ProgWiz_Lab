@@ -33,6 +33,8 @@
             button_Usun = new Button();
             button_zapisz = new Button();
             button_wczytaj = new Button();
+            button_SaveToXML = new Button();
+            button_ReadFromXML = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -84,11 +86,33 @@
             button_wczytaj.UseVisualStyleBackColor = true;
             button_wczytaj.Click += button_wczytaj_Click;
             // 
+            // button_SaveToXML
+            // 
+            button_SaveToXML.Location = new Point(441, 158);
+            button_SaveToXML.Name = "button_SaveToXML";
+            button_SaveToXML.Size = new Size(106, 23);
+            button_SaveToXML.TabIndex = 5;
+            button_SaveToXML.Text = "Zapisz do XML";
+            button_SaveToXML.UseVisualStyleBackColor = true;
+            button_SaveToXML.Click += button_SaveToXML_Click;
+            // 
+            // button_ReadFromXML
+            // 
+            button_ReadFromXML.Location = new Point(441, 187);
+            button_ReadFromXML.Name = "button_ReadFromXML";
+            button_ReadFromXML.Size = new Size(106, 23);
+            button_ReadFromXML.TabIndex = 6;
+            button_ReadFromXML.Text = "Wczytaj z XML";
+            button_ReadFromXML.UseVisualStyleBackColor = true;
+            button_ReadFromXML.Click += button_ReadFromXML_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(562, 297);
+            Controls.Add(button_ReadFromXML);
+            Controls.Add(button_SaveToXML);
             Controls.Add(button_wczytaj);
             Controls.Add(button_zapisz);
             Controls.Add(button_Usun);
@@ -107,5 +131,7 @@
         private Button button_Usun;
         private Button button_zapisz;
         private Button button_wczytaj;
+        private Button button_SaveToXML;
+        private Button button_ReadFromXML;
     }
 }
