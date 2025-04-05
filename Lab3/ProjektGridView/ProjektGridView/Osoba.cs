@@ -1,7 +1,8 @@
-﻿
+﻿using System.Text.Json.Serialization;
+
 namespace ProjektGridView
 {
-    class Osoba
+    public class Osoba
     {
         public int Id { get; set; }
         public string Imie { get; set; }

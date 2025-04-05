@@ -33,6 +33,8 @@
             button_Usun = new Button();
             button_zapisz = new Button();
             button_wczytaj = new Button();
+            button_saveToJson = new Button();
+            button_readFromJson = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -84,11 +86,33 @@
             button_wczytaj.UseVisualStyleBackColor = true;
             button_wczytaj.Click += button_wczytaj_Click;
             // 
+            // button_saveToJson
+            // 
+            button_saveToJson.Location = new Point(441, 70);
+            button_saveToJson.Name = "button_saveToJson";
+            button_saveToJson.Size = new Size(106, 23);
+            button_saveToJson.TabIndex = 5;
+            button_saveToJson.Text = "Zapisz do JSON";
+            button_saveToJson.UseVisualStyleBackColor = true;
+            button_saveToJson.Click += button_saveToJson_Click;
+            // 
+            // button_readFromJson
+            // 
+            button_readFromJson.Location = new Point(441, 99);
+            button_readFromJson.Name = "button_readFromJson";
+            button_readFromJson.Size = new Size(106, 23);
+            button_readFromJson.TabIndex = 6;
+            button_readFromJson.Text = "Wczytaj z JSON";
+            button_readFromJson.UseVisualStyleBackColor = true;
+            button_readFromJson.Click += button_readFromJson_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(562, 297);
+            Controls.Add(button_readFromJson);
+            Controls.Add(button_saveToJson);
             Controls.Add(button_wczytaj);
             Controls.Add(button_zapisz);
             Controls.Add(button_Usun);
@@ -107,5 +131,7 @@
         private Button button_Usun;
         private Button button_zapisz;
         private Button button_wczytaj;
+        private Button button_saveToJson;
+        private Button button_readFromJson;
     }
 }

@@ -1,0 +1,23 @@
+[
+  {
+    "Id": 1,
+    "Imie": "Grzegorz",
+    "Nazwisko": "Kacp",
+    "Wiek": 27,
+    "Stanowisko": "Analityk"
+  },
+  {
+    "Id": 2,
+    "Imie": "Jurand",
+    "Nazwisko": "Handsh",
+    "Wiek": 21,
+    "Stanowisko": "Programista"
+  },
+  {
+    "Id": 3,
+    "Imie": "Julia",
+    "Nazwisko": "Wron",
+    "Wiek": 25,
+    "Stanowisko": "Projektant"
+  }
+]

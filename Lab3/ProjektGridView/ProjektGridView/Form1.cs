@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace ProjektGridView
 {
     public partial class Form1 : Form
@@ -57,9 +59,9 @@ namespace ProjektGridView
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                if (MessageBox.Show("Czy na pewno chcesz usunąć zaznaczony wiersz?", 
-                                  "Potwierdzenie", 
-                                  MessageBoxButtons.YesNo, 
+                if (MessageBox.Show("Czy na pewno chcesz usunąć zaznaczony wiersz?",
+                                  "Potwierdzenie",
+                                  MessageBoxButtons.YesNo,
                                   MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     dataGridView1.Rows.RemoveAt(dataGridView1.SelectedRows[0].Index);
@@ -67,9 +69,9 @@ namespace ProjektGridView
             }
             else
             {
-                MessageBox.Show("Zaznacz wiersz do usunięcia!", 
-                              "Informacja", 
-                              MessageBoxButtons.OK, 
+                MessageBox.Show("Zaznacz wiersz do usunięcia!",
+                              "Informacja",
+                              MessageBoxButtons.OK,
                               MessageBoxIcon.Information);
             }
         }
@@ -78,7 +80,7 @@ namespace ProjektGridView
         {
             // Zapisanie nextId w pierwszej linii
             string csvContent = $"#NextID:{nextId}" + Environment.NewLine;
-            
+
             // Tworzenie nagłówka pliku CSV
             csvContent += string.Join(",", dataGridView.Columns.Cast<DataGridViewColumn>()
                 .Select(column => column.HeaderText)) + Environment.NewLine;
@@ -106,7 +108,7 @@ namespace ProjektGridView
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 ExportToCSV(dataGridView1, saveFileDialog1.FileName);
-                MessageBox.Show("Dane zostały zapisane pomyślnie!", "Sukces", 
+                MessageBox.Show("Dane zostały zapisane pomyślnie!", "Sukces",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -167,8 +169,85 @@ namespace ProjektGridView
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 LoadCSVToDataGridView(openFileDialog1.FileName);
-                MessageBox.Show("Dane zostały wczytane pomyślnie!", "Sukces", 
+                MessageBox.Show("Dane zostały wczytane pomyślnie!", "Sukces",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void button_saveToJson_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Pliki JSON (*.json)|*.json|Wszystkie pliki (*.*)|*.*";
+            saveFileDialog.Title = "Wybierz lokalizację zapisu pliku JSON";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    var osoby = new List<Osoba>();
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    {
+                        if (!row.IsNewRow)
+                        {
+                            osoby.Add(new Osoba
+                            {
+                                Id = Convert.ToInt32(row.Cells["id"].Value),
+                                Imie = row.Cells["imie"].Value.ToString(),
+                                Nazwisko = row.Cells["nazwisko"].Value.ToString(),
+                                Wiek = Convert.ToInt32(row.Cells["wiek"].Value),
+                                Stanowisko = row.Cells["stanowisko"].Value.ToString()
+                            });
+                        }
+                    }
+
+                    var options = new JsonSerializerOptions { WriteIndented = true };
+                    string jsonString = JsonSerializer.Serialize(osoby, options);
+                    File.WriteAllText(saveFileDialog.FileName, jsonString);
+
+                    MessageBox.Show("Dane zostały zapisane do pliku JSON pomyślnie!", "Sukces",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Wystąpił błąd podczas zapisywania do pliku JSON: {ex.Message}", "Błąd",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void button_readFromJson_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Pliki JSON (*.json)|*.json|Wszystkie pliki (*.*)|*.*";
+            openFileDialog.Title = "Wybierz plik JSON do wczytania";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string jsonString = File.ReadAllText(openFileDialog.FileName);
+                    var osoby = JsonSerializer.Deserialize<List<Osoba>>(jsonString);
+
+                    dataGridView1.Rows.Clear();
+                    foreach (var osoba in osoby)
+                    {
+                        dataGridView1.Rows.Add(osoba.Id, osoba.Imie, osoba.Nazwisko, osoba.Wiek, osoba.Stanowisko);
+                    }
+
+                    // Aktualizacja nextId na podstawie najwyższego ID w wczytanych danych
+                    if (osoby != null && osoby.Any())
+                    {
+                        nextId = osoby.Max(o => o.Id) + 1;
+                    }
+
+                    MessageBox.Show("Dane zostały wczytane z pliku JSON pomyślnie!", "Sukces",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Wystąpił błąd podczas wczytywania z pliku JSON: {ex.Message}", "Błąd",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }
