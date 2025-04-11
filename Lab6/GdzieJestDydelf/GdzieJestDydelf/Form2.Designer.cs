@@ -44,6 +44,8 @@
             label7 = new Label();
             label8 = new Label();
             textBox_Czas = new TextBox();
+            label9 = new Label();
+            textBox_DostepnePola = new TextBox();
             ((System.ComponentModel.ISupportInitialize)numericUpDown_OsX).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown_OsY).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown_Dedelfy).BeginInit();
@@ -115,7 +117,7 @@
             // button_OK
             // 
             button_OK.Font = new Font("Segoe UI", 15F);
-            button_OK.Location = new Point(12, 496);
+            button_OK.Location = new Point(12, 528);
             button_OK.Name = "button_OK";
             button_OK.Size = new Size(111, 34);
             button_OK.TabIndex = 15;
@@ -126,7 +128,7 @@
             // button_Anuluj
             // 
             button_Anuluj.Font = new Font("Segoe UI", 15F);
-            button_Anuluj.Location = new Point(138, 496);
+            button_Anuluj.Location = new Point(138, 528);
             button_Anuluj.Name = "button_Anuluj";
             button_Anuluj.Size = new Size(109, 34);
             button_Anuluj.TabIndex = 16;
@@ -201,7 +203,7 @@
             // label7
             // 
             label7.Font = new Font("Segoe UI", 15F);
-            label7.Location = new Point(82, 376);
+            label7.Location = new Point(80, 438);
             label7.Name = "label7";
             label7.Size = new Size(96, 28);
             label7.TabIndex = 22;
@@ -211,7 +213,7 @@
             // label8
             // 
             label8.Font = new Font("Segoe UI", 10F);
-            label8.Location = new Point(82, 404);
+            label8.Location = new Point(80, 466);
             label8.Name = "label8";
             label8.Size = new Size(96, 19);
             label8.TabIndex = 23;
@@ -221,7 +223,7 @@
             // textBox_Czas
             // 
             textBox_Czas.Font = new Font("Segoe UI", 15F);
-            textBox_Czas.Location = new Point(84, 426);
+            textBox_Czas.Location = new Point(82, 488);
             textBox_Czas.Name = "textBox_Czas";
             textBox_Czas.Size = new Size(97, 34);
             textBox_Czas.TabIndex = 24;
@@ -229,11 +231,33 @@
             textBox_Czas.TextAlign = HorizontalAlignment.Center;
             textBox_Czas.TextChanged += textBox_Czas_TextChanged;
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 15F);
+            label9.Location = new Point(54, 362);
+            label9.Name = "label9";
+            label9.Size = new Size(162, 28);
+            label9.TabIndex = 25;
+            label9.Text = "DOSTĘPNE POLA";
+            label9.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // textBox_DostepnePola
+            // 
+            textBox_DostepnePola.Font = new Font("Segoe UI", 15F);
+            textBox_DostepnePola.Location = new Point(79, 393);
+            textBox_DostepnePola.Name = "textBox_DostepnePola";
+            textBox_DostepnePola.Size = new Size(97, 34);
+            textBox_DostepnePola.TabIndex = 26;
+            textBox_DostepnePola.TextAlign = HorizontalAlignment.Center;
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(259, 542);
+            ClientSize = new Size(259, 574);
+            Controls.Add(textBox_DostepnePola);
+            Controls.Add(label9);
             Controls.Add(textBox_Czas);
             Controls.Add(label8);
             Controls.Add(label7);
@@ -278,5 +302,7 @@
         private Label label7;
         private Label label8;
         private TextBox textBox_Czas;
+        private Label label9;
+        private TextBox textBox_DostepnePola;
     }
 }
