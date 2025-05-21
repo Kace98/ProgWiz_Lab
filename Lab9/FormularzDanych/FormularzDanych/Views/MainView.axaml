@@ -1,0 +1,176 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:FormularzDanych.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="FormularzDanych.Views.MainView"
+             x:DataType="vm:MainViewModel">
+	<ScrollViewer>
+		<StackPanel Margin="30" Spacing="12">
+			<Border Background="#f0f0f0" Padding="20" CornerRadius="8">
+				<TextBlock Text="Wniosek o przeprowadzenie egzaminu komisyjnego" 
+						 HorizontalAlignment="Center" 
+						 FontSize="28" 
+						 FontWeight="Bold"
+						 Foreground="#2c3e50"/>
+			</Border>
+
+			<Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" Margin="0,20,0,0">
+				<Label Grid.Row="0" Grid.Column="0" FontSize="14" FontWeight="SemiBold">Data wypełnienia:</Label>
+				<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding DataWypelnienia}" Margin="0,0,0,8" Padding="8"/>
+
+				<Label Grid.Row="1" Grid.Column="0" FontSize="14" FontWeight="SemiBold">Numer albumu:</Label>
+				<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding NumerAlbumu}" Margin="0,0,0,8" Padding="8"/>
+
+				<Label Grid.Row="2" Grid.Column="0" FontSize="14" FontWeight="SemiBold">Imię i nazwisko:</Label>
+				<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NazwiskoImie}" Margin="0,0,0,8" Padding="8"/>
+
+				<Label Grid.Row="3" Grid.Column="0" FontSize="14" FontWeight="SemiBold">Semestr, Rok:</Label>
+				<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SemestrRok}" Margin="0,0,0,8" Padding="8"/>
+
+				<Label Grid.Row="4" Grid.Column="0" FontSize="14" FontWeight="SemiBold">Kierunek i stopień studiów:</Label>
+				<TextBox Grid.Row="4" Grid.Column="1" Text="{Binding KierunekStopien}" Margin="0,0,0,8" Padding="8"/>
+
+				<Label Grid.Row="5" Grid.Column="0" FontSize="14" FontWeight="SemiBold">Przedmiot:</Label>
+				<TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Przedmiot}" Margin="0,0,0,8" Padding="8"/>
+
+				<Label Grid.Row="6" Grid.Column="0" FontSize="14" FontWeight="SemiBold">Punkty:</Label>
+				<TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Punkty}" Margin="0,0,0,8" Padding="8"/>
+
+				<Label Grid.Row="7" Grid.Column="0" FontSize="14" FontWeight="SemiBold">Prowadzący:</Label>
+				<TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Prowadzacy}" Margin="0,0,0,8" Padding="8"/>
+
+				<Label Grid.Row="8" Grid.Column="0" FontSize="14" FontWeight="SemiBold">Uzasadnienie:</Label>
+				<TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Uzasadnienie}" Margin="0,0,0,8" Padding="8"/>
+
+				<Label Grid.Row="9" Grid.Column="0" FontSize="14" FontWeight="SemiBold">Data i podpis studenta:</Label>
+				<TextBox Grid.Row="9" Grid.Column="1" Text="{Binding DataPodpisStudenta}" Margin="0,0,0,8" Padding="8"/>
+
+				<Label Grid.Row="10" Grid.Column="0" FontSize="14" FontWeight="SemiBold">Decyzja:</Label>
+				<TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Decyzja}" Margin="0,0,0,8" Padding="8"/>
+
+				<Label Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" FontSize="16" FontWeight="Bold" Margin="0,20,0,10">Skład komisji:</Label>
+
+				<Label Grid.Row="12" Grid.Column="0" FontSize="14" FontWeight="SemiBold">Komisja 1:</Label>
+				<TextBox Grid.Row="12" Grid.Column="1" Text="{Binding Komisja1}" Margin="0,0,0,8" Padding="8"/>
+
+				<Label Grid.Row="13" Grid.Column="0" FontSize="14" FontWeight="SemiBold">Komisja 2:</Label>
+				<TextBox Grid.Row="13" Grid.Column="1" Text="{Binding Komisja2}" Margin="0,0,0,8" Padding="8"/>
+
+				<Label Grid.Row="14" Grid.Column="0" FontSize="14" FontWeight="SemiBold">Komisja 3:</Label>
+				<TextBox Grid.Row="14" Grid.Column="1" Text="{Binding Komisja3}" Margin="0,0,0,8" Padding="8"/>
+
+				<Label Grid.Row="15" Grid.Column="0" FontSize="14" FontWeight="SemiBold">Data decyzji:</Label>
+				<TextBox Grid.Row="15" Grid.Column="1" Text="{Binding DataDecyzji}" Margin="0,0,0,8" Padding="8"/>
+			</Grid>
+
+			<StackPanel Orientation="Horizontal" Spacing="12" Margin="0,20,0,0" HorizontalAlignment="Center">
+				<Button Content="Zapisz do bazy" 
+						Command="{Binding ZapiszCommand}"
+						Padding="20,10"
+						Background="#3498db"
+						Foreground="White"
+						FontWeight="SemiBold"
+						IsEnabled="{Binding !IsLoading}"/>
+				<Button Content="Pokaż wpisy" 
+						Command="{Binding PokazWpisyCommand}"
+						Padding="20,10"
+						Background="#2ecc71"
+						Foreground="White"
+						FontWeight="SemiBold"
+						IsEnabled="{Binding !IsLoading}"/>
+				<Button Content="Wyczyść formularz" 
+						Command="{Binding WyczyscFormularzCommand}"
+						Padding="20,10"
+						Background="#e74c3c"
+						Foreground="White"
+						FontWeight="SemiBold"
+						IsEnabled="{Binding !IsLoading}"/>
+			</StackPanel>
+
+			<Border Background="#f8f9fa" Padding="20" CornerRadius="8" Margin="0,20,0,0">
+				<StackPanel>
+					<Grid ColumnDefinitions="*,Auto" Margin="0,0,0,20">
+						<TextBlock Text="Poprzednie wpisy" 
+								 FontSize="24" 
+								 FontWeight="Bold"
+								 Foreground="#2c3e50"/>
+						<TextBlock Text="{Binding StatusMessage}"
+								 Grid.Column="1"
+								 VerticalAlignment="Center"
+								 Foreground="#7f8c8d"
+								 FontStyle="Italic"/>
+					</Grid>
+					<ProgressBar IsVisible="{Binding IsLoading}"
+							   IsIndeterminate="True"
+							   Margin="0,0,0,10"/>
+					<ListBox ItemsSource="{Binding Wnioski}" 
+							Background="Transparent"
+							BorderThickness="0">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<Border Background="White" 
+										CornerRadius="8" 
+										Padding="15" 
+										Margin="0,0,0,10"
+										BorderThickness="1"
+										BorderBrush="#e0e0e0">
+									<StackPanel Spacing="8">
+										<TextBlock Text="{Binding NazwiskoImie}" 
+												 FontSize="18" 
+												 FontWeight="Bold"
+												 Foreground="#2c3e50"/>
+										<Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" Margin="0,10,0,0">
+											<TextBlock Grid.Row="0" Grid.Column="0" Text="Numer albumu: " FontWeight="SemiBold"/>
+											<TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding NumerAlbumu}"/>
+											
+											<TextBlock Grid.Row="1" Grid.Column="0" Text="Data wypełnienia: " FontWeight="SemiBold"/>
+											<TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding DataWypelnienia}"/>
+											
+											<TextBlock Grid.Row="2" Grid.Column="0" Text="Semestr, rok: " FontWeight="SemiBold"/>
+											<TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding SemestrRok}"/>
+											
+											<TextBlock Grid.Row="3" Grid.Column="0" Text="Kierunek i stopień: " FontWeight="SemiBold"/>
+											<TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding KierunekStopien}"/>
+											
+											<TextBlock Grid.Row="4" Grid.Column="0" Text="Przedmiot: " FontWeight="SemiBold"/>
+											<TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Przedmiot}"/>
+											
+											<TextBlock Grid.Row="5" Grid.Column="0" Text="Punkty: " FontWeight="SemiBold"/>
+											<TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Punkty}"/>
+											
+											<TextBlock Grid.Row="6" Grid.Column="0" Text="Prowadzący: " FontWeight="SemiBold"/>
+											<TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding Prowadzacy}"/>
+											
+											<TextBlock Grid.Row="7" Grid.Column="0" Text="Uzasadnienie: " FontWeight="SemiBold"/>
+											<TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Uzasadnienie}"/>
+											
+											<TextBlock Grid.Row="8" Grid.Column="0" Text="Data i podpis studenta: " FontWeight="SemiBold"/>
+											<TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding DataPodpisStudenta}"/>
+											
+											<TextBlock Grid.Row="9" Grid.Column="0" Text="Decyzja: " FontWeight="SemiBold"/>
+											<TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding Decyzja}"/>
+											
+											<TextBlock Grid.Row="10" Grid.Column="0" Text="Komisja 1: " FontWeight="SemiBold"/>
+											<TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding Komisja1}"/>
+											
+											<TextBlock Grid.Row="11" Grid.Column="0" Text="Komisja 2: " FontWeight="SemiBold"/>
+											<TextBlock Grid.Row="11" Grid.Column="1" Text="{Binding Komisja2}"/>
+											
+											<TextBlock Grid.Row="12" Grid.Column="0" Text="Komisja 3: " FontWeight="SemiBold"/>
+											<TextBlock Grid.Row="12" Grid.Column="1" Text="{Binding Komisja3}"/>
+											
+											<TextBlock Grid.Row="13" Grid.Column="0" Text="Data decyzji: " FontWeight="SemiBold"/>
+											<TextBlock Grid.Row="13" Grid.Column="1" Text="{Binding DataDecyzji}"/>
+										</Grid>
+									</StackPanel>
+								</Border>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</StackPanel>
+			</Border>
+		</StackPanel>
+	</ScrollViewer>
+</UserControl>
